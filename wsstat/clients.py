@@ -192,6 +192,12 @@ class WebsocketTestingClient(object):
 
                 connected_websocket.process_message(message)
 
+                # send message 
+                sent = yield from websocket.send("A"*1024*1024)
+                self.logger.log("Data sent")
+                yield from asyncio.sleep(1)
+
+
         except Exception as e:
             # Log the exception
             self.logger.log("[{}] {}".format(connected_websocket.id, e))
